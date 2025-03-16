@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>BUYSELL</h1><hr>
-<h4>Каталог товаров</h4>
+<h4>Каталог товаров</h4>12121
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price} руб. | <a href="/product/info/${product.id}">Подробнее...</a></p>
