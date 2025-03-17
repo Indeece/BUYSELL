@@ -6,6 +6,10 @@
 <body>
 <h1>BUYSELL</h1><hr>
 <h4>Каталог товаров</h4>
+<form action="/" method="get">
+    Поиск по названию объявления: <input type="text" name="title"><br>
+    <input type="submit" value="Поиск"/>
+</form>
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price} руб. | <a href="/product/info/${product.id}">Подробнее...</a></p>
