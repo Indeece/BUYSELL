@@ -8,6 +8,7 @@ import ru.relex.buysell.enums.Role;
 import ru.relex.buysell.models.User;
 import ru.relex.buysell.repositories.UserRepository;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class UserService {
         if (userRepository.findByEmail(user.getEmail()) != null) return false;
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
+        user.getRoles().add(Role.ROLE_ADMIN);
         log.info("Saving user with email: {}", email);
         userRepository.save(user);
         return true;
@@ -61,5 +62,9 @@ public class UserService {
             }
         }
         userRepository.save(user);
+    }
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepository.findByEmail(principal.getName());
     }
 }
