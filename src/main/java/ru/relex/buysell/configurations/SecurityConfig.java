@@ -18,9 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/product/info/**", "/images/**", "/registration")
-                .permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/", "/product/**", "/images/**", "/registration", "/user/**").permitAll() // Доступ для всех
+                .antMatchers("/admin/**").hasRole("ADMIN") // Ограничение доступа к /admin только для ADMIN
+                .anyRequest().authenticated() // Все остальные запросы требуют аутентификации
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -28,6 +28,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/", "/product/**", "/images/**", "/registration", "/user/**")
+//                .permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .permitAll();
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
